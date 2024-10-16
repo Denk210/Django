@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Решение квадратных уравнений</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .equation {
+            background-color: #e0f7fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .solution {
+            background-color: #ffe0b2;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>Решение квадратных уравнений</h1>
+    <div class="container">
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% else %}
+            <div class="equation">
+                <p align="left"><b>Уравнение:</b></p>
+                <p>{{ equation }}</p>
+            </div>
+            <div class="solution">
+                <p align="left"><b>Решение:</b></p>
+                <p>{{ solution }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+<footer>
+    <p align="center">Сделано в России<br></p>
+    <p>Студент 3 курса 310 группы ИМиИ МПГУ - Казаков Д. В.</p>
+</footer>
+</html>
