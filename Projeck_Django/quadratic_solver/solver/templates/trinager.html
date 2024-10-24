@@ -1,0 +1,122 @@
+<!-- templates/trinager.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тренажёр для решения квадратных уравнений</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .equation {
+            background-color: #e0f7fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .solution {
+            background-color: #ffe0b2;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .history {
+            margin-top: 20px;
+        }
+
+        .history ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .history li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тренажёр для решения квадратных уравнений</h1>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="equation">
+                <p>Уравнение: {{ a }}x^2 + {{ b }}x + {{ c }} = 0</p>
+            </div>
+            <label for="solution">Ваше решение:</label>
+            <input type="hidden" name="a" value="{{ a }}">
+            <input type="hidden" name="b" value="{{ b }}">
+            <input type="hidden" name="c" value="{{ c }}">
+            <input type="text" name="solution" id="solution" required>
+            <button type="submit">Отправить</button>
+        </form>
+
+        {% if user_solution %}
+            <div class="solution">
+                <h2>Результаты:</h2>
+                <p>Ваше решение: {{ user_solution }}</p>
+                <p>Правильное решение: {{ correct_solution }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="history">
+        <h2>История решений:</h2>
+        <ul>
+            {% for entry in history %}
+                <li>{{ entry.timestamp }}: {{ entry.a }}x^2 + {{ entry.b }}x + {{ entry.c }} = 0<br>
+                    Ваше решение: {{ entry.user_solution }}<br>
+                    Правильное решение: {{ entry.correct_solution }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <a href="/solve">Переход на главную страницу</a>
+    </div>
+</body>
+</html>
